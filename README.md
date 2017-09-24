@@ -23,5 +23,5 @@
 	显示server is running at 8080 port..则成功连接服务器 
 四、需要预览效果的话可以直接打开myindex.html 
 五、打开myindex.html页面后直接进入到首页，点击注册进行注册，注册成功后可以跳转回登陆页面进行登陆（可以在数据库中db.test.find()查找到数据）
-<a href=" https://chenjuanmemeda.github.io/simple-personal-blog/client/myindex.html">点击预览</a>
+<a href="https://chenjuanmemeda.github.io/simple-personal-blog/client/myindex.html">点击预览</a>
 
