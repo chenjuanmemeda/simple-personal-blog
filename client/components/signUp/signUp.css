@@ -1,0 +1,119 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../../fonts/glyphicons-halflings-regular.eot');
+    src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+.form {
+    width: 728px;
+    /* height: 400px; */
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.icon span {
+    transition: all 4s;padding-left: 20px;font-size: 30px;
+  }
+.glyphicon {
+    position: relative;
+    top: 13px;right: 8px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon span:hover {
+    transform: rotate(1440deg);
+}
+.info {
+    margin: 10px;
+    font-size: 12px;
+    height: 20px;
+
+}
+
+.input:hover {
+    color: #3aa373;
+}
+ 
+p {
+    color: #7f8c8d;
+    height: 50px;
+    text-align: center;
+    transition: all 0.4s;
+}
+/* .signUp_rule{
+      padding-left: 35px;
+      padding-top: 20px;
+}
+.signUp_rule a{ color: #42b983;outline: none}
+.signUp_rule a:hover{text-decoration: none;outline: none} */
+p input {
+    transition: all 0.4s;
+    width: 200px;
+    padding: 8px;
+    border-bottom: 1px solid #42b983;
+    position: relative;
+  }
+p input[type=checkbox]{
+    margin: 15px 0 0;
+    line-height: normal;
+    width: 20px;
+    margin-left: 40px;
+    /* transition: none; */
+}
+button, input{
+    border: none;
+    outline: none;
+    font-family: Century Gothic,sans-serif;
+    background-color: transparent;
+   
+} 
+input::input-placeholder { text-align: center; }
+p.input span#error{
+  color: red;
+  position: absolute;
+}
+p input:focus {
+    width: 180px;
+}
+p a{
+    color:#38A372;
+}
+p a:focus {
+    width: 180px;
+}
+p a:hover{
+    text-decoration: none;
+    color:#F91316;
+    font-size: 20px;
+}
+p .signUp_rule{
+    padding-left: 35px;
+    padding-top: 20px;
+}
+p .signUp_rule a{ color: #42b983;outline: none}
+p .signUp_rule a:hover{text-decoration: none;outline: none}
+button {
+    transition: all 0.4s;
+    color: #7f8c8d;
+    border: 1px solid #38A372;
+    border-radius: 4px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+p button #BtnReset{
+    margin-left: 40px;
+}
+button:hover {
+    background-color: #38A372;
+    color: #FFF;
+}

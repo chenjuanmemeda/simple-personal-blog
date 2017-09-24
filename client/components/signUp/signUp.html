@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>signUp注册页面</title>
+	<link rel="icon" href="../../images/icon.png" type="image/x-icon">
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/font-awesome.min.css">
+	<link rel="stylesheet" href="signUp.css">
+	<style>
+		 /* html {
+			height: 100%
+		  }
+		
+		  body {
+			margin: 0;
+			height: 100%;
+			background: #fff;
+		  }
+		
+		  canvas {
+			display: block;
+			width: 100%;
+			height: 100%;
+		  } */
+		.fade-enter{opacity:0;}
+		.fade-enter-active,.fade-leave-active{
+			transition:all 0.8s ease;
+		}
+		.fade-leave-to{opacity:0;}
+	</style>
+</head>
+<body>
+		<transition name="fade" mode="out-in">
+	<div id="app">
+	
+				<canvas></canvas>
+
+				<signup></signup>
+	
+	</div>	</transition>
+	<!-- <template id="canvas">
+		<canvas id="canvas" class="canvas"></canvas>
+	</template> -->
+	<template id="signup">
+		<div class="form">
+			<p class="icon">
+					<span class="glyphicon glyphicon-hand-down"></span>
+			</p>
+			<p>SETUP</p>
+			<p class="input">
+				<span class="glyphicon glyphicon-user"></span>
+				<input type="text"
+					placeholder="请输入用户名" 
+					v-model="userInfo.username" 
+					@Change = "inputChange('username',userInfo.username)" >
+				<span id="error" v-show='usernameErrorShow'>{{usernameError}}</span>
+			</p>
+			<p class="input">
+				<span class="glyphicon glyphicon-lock"></span>
+				<input type="password"
+						placeholder="请输入密码"
+						v-model="userInfo.password"
+						@Change = "inputChange('password',userInfo.password)" >
+				<span id="error" v-show='passwordErrorShow'>{{passwordError}}</span >
+			</p>
+			<p class="input">
+				<span class="glyphicon glyphicon-lock"></span>
+				<input type="password"
+						placeholder="请确认输入密码"
+						v-model="userInfo.pwdRepeat"
+						@Change = "inputChange('pwdRepeat',userInfo.pwdRepeat)">
+				<span id="error" v-show='rePasswordErrorShow'>{{rePasswordError}}</span>
+			</p>
+			<p class="input">
+				<span class="glyphicon glyphicon-phone"></span>
+				<input type="text"
+						placeholder="请输入手机号码"
+						v-model="userInfo.phone"
+						@Change = "inputChange('phone',userInfo.phone)" >
+				<span  id="error" v-show='passwordErrorShow'>{{passwordError}}</span>			
+			</p>
+			<p class="input">
+				<span class="glyphicon glyphicon-envelope"></span>
+				<input type="text"
+						placeholder="请输入邮箱地址"
+						v-model="userInfo.email"
+						@Change = "inputChange('email',userInfo.email)" >
+				<span id="error" v-show='emailErrorShow'>{{emailError}}</span>			
+			</p>
+			<p>
+				<span class="signUp_rule">
+					<span>用户注册即默认阅读并接受
+					<a hidefocus="true" href="#">《用户协议》</a>
+					及
+					<a hidefocus="true" href="#">《隐私权保护声明》</a>
+					</span>
+				</span>
+			</p>
+			
+			
+			<!-- <p class="info">{{info}}</p> -->
+			<p>
+			  <button @click="submit()" :disabled = 'beDisabled'>提交</button>
+			  <button id="BtnReset" @click="reset()">重置</button>
+			</p>
+			<p>已有账号？<a href="../../myindex.html">返回登录</a></p>
+		</div>
+	</template>
+	
+	<!-- <script src='js/jquery.min.js'></script> -->
+	<!-- vue全家桶引入 -->
+	<script src='../../js/vue.js'></script>
+	<script src='../../js/vuex.js'></script>
+	<script src='../../js/vue-resource.js'></script>
+	<script>
+		Vue.http.options.emulateJSON=false;
+		Vue.http.headers.post['Content-Type']='application/json';
+	</script>
+	<script src='../../components/signUp/signUp.js'></script>
+	<script src='../../components/signUp/canvas.js'></script>
+	<script>
+		var vm=new Vue({
+			el:'#app'	
+			
+		});
+	</script><script>
+		document.addEventListener('touchmove', function(e) {
+    e.preventDefault()
+  })
+
+  var c = document.getElementsByTagName('canvas')[0],
+    x = c.getContext('2d'),
+    pr = window.devicePixelRatio || 1,
+    w = window.innerWidth,
+    h = window.innerHeight,
+    f = 90,
+    q,
+    r = 0,
+    u = Math.PI * 2,
+    v = Math.cos,
+    z = Math.random
+
+  c.width = w * pr
+  c.height = h * pr
+  x.scale(pr, pr)
+  x.globalAlpha = 0.6
+
+  function i() {
+    x.clearRect(0, 0, w, h)
+    q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
+    while (q[1].x < w + f) d(q[0], q[1])
+  }
+
+  function d(i, j) {
+    x.beginPath()
+    x.moveTo(i.x, i.y)
+    x.lineTo(j.x, j.y)
+    var k = j.x + (z() * 2 - 0.25) * f,
+      n = y(j.y)
+    x.lineTo(k, n)
+    x.closePath()
+    r -= u / -50
+    x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+    x.fill()
+    q[0] = q[1]
+    q[1] = { x: k, y: n }
+  }
+
+  function y(p) {
+    var t = p + (z() * 2 - 1.1) * f
+    return (t > h || t < 0) ? y(p) : t
+  }
+
+  document.onclick = i
+  document.ontouchstart = i
+  i()
+	</script>
+</body>
+</html>

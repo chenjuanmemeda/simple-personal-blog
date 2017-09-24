@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+	<title>myindex</title>
+	<link rel="icon" href="images/icon.png" type="image/x-icon">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/myindex.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap-self.css"/> -->
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="components/popwindow/popwindow.css">
+    <link rel="stylesheet" href="components/login/login.css">
+
+
+</head>
+<body>
+	<!-- 导航start -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<!-- 小屏幕导航按钮和logo start -->
+			<div class="navbar-header" data-toggle="collapse" data-target=".navbar-collapse">
+				<button class="navbar-toggle">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="myindex.html" class="navbar-brand">个人博客</a>
+			</div>
+			<!-- 小屏幕导航按钮和logo end-->
+			<!-- 导航 start -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav " id='navCenter'>
+					<li><a href="">首页</a></li>
+					<li><a href="">相册</a></li>
+					<li><a href="">留言板</a></li>
+					<li><a href="">心情</a></li>
+					<li><a href="">访客</a></li>
+						
+					<!-- <li class="nav"><a href="">登陆</a></li>
+					<li><a href="">注册</a></li> -->
+				</ul>
+				<!-- 登陆注册start -->
+				<div id="app">
+					<ul class=" nav navbar-nav navbar-right">
+						 <login ></login>  
+						<li @login-change="getLoginFlag" >
+							<!-- <a href="#" @click="Show" onclick="return false">登陆</a> -->
+							<a hidefocus="true" href="loginIn.html"
+							 	v-show="!attitudeFlag" v-text="attitudeMsg.noFlag.msg" @click="Show" onclick="return false">
+							</a>
+							<a hidefocus="true" href="users.html" 
+								v-show="attitudeFlag" v-text="attitudeMsg.isFlag.msg">
+							</a>
+						</li>
+						<li><a href="#">|</a></li>
+						<!-- <li><a href="test.html" @click="toSignUp()">注册</a></li> -->
+						<li v-show="attitudeFlag">
+							<a hidefocus="true" href="index.html" @click="loginOut">退出登录</a>
+						</li>
+						<li v-show="!attitudeFlag"><a hidefocus="true" href="signUp.html" @click="toSignUp()">注册用户</a></li>
+						
+					</ul>
+				</div>
+				<template id="popwindow">
+					<transition name="fade" >
+						<div class="overlay" v-show="$store.state.isShow">
+							<div class="content">
+								<slot name="header"></slot>
+								<slot name="body"></slot>
+								<slot name="footer"></slot>
+							</div>
+						</div>
+					</transition>
+				</template>
+				<!-- login组件 -->
+                    <template id="login">
+                        <popwindow 	>
+                        <div slot='header' class='login_header'>
+                                <div @click='Close()'><img src="./images/cancel.png" alt=""></div>
+                                <span class="log_title">LOGIN</span>
+                                <span class="reg_link">没有账号？
+									<a href="components/signUp/signUp.html"  @click="toSignUp()">注册</a>
+								</span>
+                            </div>
+                            <div slot='body' class="login_body"> 
+									<ul>
+										<li>
+											<p id="user" v-show="usernameErrorShow">{{usernameError}}</p>   
+											<span class="glyphicon glyphicon-user"></span>
+											<input type="text" id="username" 
+												placeholder="请输入用户名"  
+												v-model='userInfo.username'  
+												@change = "inputChange('username',userInfo.username)">
+										</li>
+										<li>
+											<p  id="word" v-show="passwordErrorShow">{{passwordError}}</p>   
+											<span class="glyphicon glyphicon-lock"></span>
+											<input type="password" id="password" 
+												placeholder="请输入密码"   
+												v-model="userInfo.password"
+												@change = "inputChange('password',userInfo.password)">
+										</li>
+									</ul>
+                                <p >
+									<button @click ='loginSubmit' :disabled='beDisabled'>登陆</button>
+									<a href="#" @click="joke">忘记密码？</a>
+                                </p>
+                                
+                            </div>
+                            <div slot='footer' class="login_footer">
+                                <p>用第三方账号直接登录</p>
+                                <div class="sina">
+									<a href="">
+										<img src="./images/weibo.png" alt="">
+									</a>
+								</div>
+                                <div class="qq"><a href=""><img src="./images/qq.png" alt=""></a></div>
+                                <div class="douban"><a href=""><img src="./images/douban.png" alt=""></a></div>
+                                <div class="renren"><a href=""><img src="./images/renren.png" alt=""></a></div>
+                            </div>
+
+                        </popwindow>
+                    </template>
+                
+				<!-- 登陆注册end -->
+			</div>
+			<!-- 导航 end -->
+			
+
+		</div>
+
+		
+	</nav>
+	<!-- 导航end -->
+	<!-- home start -->
+	<section id="home">
+		<div class="lvjing">
+			<div class="container">
+				<div class="row wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<h1>欢迎来到你的个人博客</h1>
+						<p>
+							快来发布一些你喜欢的文字和图片吧~<br/>
+							世界很大 这里有你有我就好~
+						</p>
+						<img src="images/timg (2).jpg" class="img-responsive" alt=""/>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--home end-->
+
+	<section id="photoshow">
+		<div class="container">
+			<div class="col-md-6 wow fadeInLeft">
+				<h2>佳句鉴赏</h2>
+				<p>你若赐我一段浮华,我便许你满世繁花</p>
+				<p><span class="glyphicon glyphicon-grain mai-icon"></span>凌晨四点钟，看到海棠花未眠。——川端康成</p>
+				<p><span class="glyphicon glyphicon-grain mai-icon"></span>
+				哪里会有人喜欢孤独，不过是不喜欢失望。——村上春树</p>
+			</div>
+			<div class="col-md-6 wow fadeInRight">
+				<img src="images/1.png" class="img-responsive" alt=""/>
+			</div>
+		</div>
+	</section>
+	
+	<section id="photoshow">
+		<div class="container wow fadeInUp">
+			<div class="col-md-6">
+				<img src="images/2.png" class="img-responsive" alt=""/>
+			</div>
+			<div class="col-md-6">
+				<h2>佳句鉴赏</h2>
+				<p>你最可爱，我说时来不及思索，但思索之后，还是这样说。——普希金</p>
+				<p><span class="glyphicon glyphicon-grain mai-icon"></span>若我会见到你，事隔经年。我如何向你招呼，以眼泪，以沉默。——拜伦</p>
+				<p><span class="glyphicon glyphicon-grain mai-icon"></span>我只是个戏子，在别人的故事里，流着自己的泪。——席慕蓉</p>
+			</div>
+		</div>
+	</section>
+	
+	
+	<!--contact start-->
+	<section id="contact">
+		<div class="lvjing">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6  wow fadeInLeft">
+						<h2>
+							<span class="glyphicon glyphicon-send"></span>
+							&nbsp;
+							联系我
+						</h2>
+						<p>
+							性格开朗，具有团队协作能力。求知欲强，乐于接触学习新事物。积极向上，善于发现并解决问题。喜欢逛技术博客提升自我水平，学习能力强，专业成绩突出，多次获得奖学金。</p>
+						<address>
+							<p>
+								<span class="glyphicon glyphicon-home"></span>
+								&nbsp;
+								地址:深圳市
+							</p>
+							<p>
+								<span class="glyphicon glyphicon-phone-alt"></span>
+								&nbsp;
+								联系电话：15270891589
+							</p>
+							<p>
+								<span class="glyphicon glyphicon-envelope"></span>
+								&nbsp;
+								邮箱:549827408@qq.com
+							</p>
+						</address>
+					</div>
+					<div class="col-md-6  wow fadeInRight">
+						<form action="#" method="post">
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="您的姓名"/>
+							</div>
+							<div class="col-md-6">
+								<input type="email" class="form-control" placeholder="您的邮箱"/>
+							</div>
+							<div class="col-md-12">
+								<input type="text" class="form-control" placeholder="标题"/>
+							</div>
+							<div class="col-md-12">
+								<textarea class="form-control" placeholder="留言内容" rows="4"></textarea>
+							</div>
+							<div class="col-md-8">
+								<input type="submit" class="form-control" value="提交"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--contact end-->
+	<!--footer start-->
+	<footer>
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <p>
+	                    Copyright&nbsp;©&nbsp;chenjuanmemeda
+	                </p>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
+	<!--footer-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.singlePageNav.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script>
+	    $(function(){
+	        /*导航跳转效果插件*/
+	        $('.nav').singlePageNav({
+	            offset:70
+	            // 偏移量 导航高度
+	        });
+	        /*小屏幕导航点击关闭菜单*/
+	        $('.navbar-collapse a').click(function(){
+	            $('.navbar-collapse').collapse('hide');
+	        });
+	        new WOW().init();
+	    })
+	</script>
+	 <!-- vue全家桶引入 -->
+	<script src="js/cookieUtil.js"></script>
+    <script src='js/vue.js'></script>
+    <script src='js/vuex.js'></script>
+    <script src='js/vue-resource.js'></script>
+    <script>
+        Vue.http.options.emulateJSON=false;
+        Vue.http.headers.post['Content-Type']='application/json';
+    </script>
+    <!-- vue组件相关js引入 -->
+    <script src='components/popwindow/popwindow.js'></script>
+    <script src='components/login/login.js'></script>
+
+    <!-- <script src='components/register/register.js'></script> -->
+    <script src='store/store.js'></script>
+	<!-- 根实例 -->
+    <script>
+        var vm=new Vue({
+			el:'#app',
+			store:store,
+			data:{
+				attitudeMsg:{
+						isFlag:{msg:'欢迎，'},//登录状态下
+						noFlag:{msg:'登录'},//未登录状态下
+					},//登录状态显示信息
+				attitudeFlag:false, // 记录登录状态
+				loginInfo:{flag:false},
+			},
+			watch:{
+				attitudeFlag:function(){
+					this.$emit('login-change',this.attitudeFlag);
+				},
+			},
+			created:function(){
+				//加载之前 获取cookie并存起来
+				for(var p in this.cookieData){
+					this.cookieData[p]=cookieUtil.get(p);
+				}
+				//验证用户名
+				this.userTest();
+				//发送给父组件当前登录状态,因为在页面上退出登录会刷新页面，但是不会触发watch，所以在加载的时候也发送一次
+				this.$emit('login-change',this.attitudeFlag);
+			},
+			methods:{
+				Show:function(){
+					 this.$store.state.isShow=true;
+				},
+				// app组件按钮点击跳转页面
+				toSignUp:function(){
+               	 	window.location.replace('../client/components/signUp/signUp.html');
+				},
+				getLoginFlag:function(flag){
+					this.loginInfo.flag=flag;
+				},
+				//验证用户
+				userTest:function(){
+					//此处要发送ajax请求，获取testItem，来验证用户名
+					this.$http({
+						url:this.url,
+						method:"post",
+						data:this.cookieData,
+						emulateJSON:true,
+					}).then(function(res){
+						if (res.data.flag=='1') {//返回1 验证成功
+							if(!!res.data.name){
+								this.attitudeMsg.isFlag.msg+=res.data.name;
+								cookieUtil.set('name',res.data.name);
+							}else{
+								this.attitudeMsg.isFlag.msg+=this.cookieData.username;
+							}
+							this.attitudeFlag=true;
+						}else if(res.data.flag=='0'){ //返回0 验证失败
+							this.attitudeFlag=false;
+							return;
+						}
+					},function(){});
+				},
+				//退出登录清空cookie
+				loginOut:function(){
+					cookieUtil.del('username');
+					cookieUtil.del('password');
+				},
+				
+			}
+        });
+    </script>
+</body>
+</html>
